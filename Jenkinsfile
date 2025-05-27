@@ -68,12 +68,6 @@ pipeline {
                 '''
             }
         }
-
-        stage('Trigger CD Pipeline') {
-            steps {
-                build job: 'wanderlust-cd'
-            }
-        }
     }
 
     post {
