@@ -18,11 +18,23 @@ spec:
         ports:
         - containerPort: 5000
         env:
-          - name: MYSQL_HOST
-            value: ${mysql_host}
-          - name: MYSQL_USER
-            value: ${mysql_user}
-          - name: MYSQL_PASSWORD
-            value: ${mysql_password}
-          - name: MYSQL_DB
-            value: ${mysql_db}
+        - name: MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: MYSQL_HOST
+        - name: MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: MYSQL_USER
+        - name: MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: app-config
+              key: MYSQL_DB
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: app-secret
+              key: MYSQL_PASSWORD
