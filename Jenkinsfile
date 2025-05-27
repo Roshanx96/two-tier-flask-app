@@ -5,7 +5,7 @@ pipeline {
         GITHUB_CREDENTIALS = 'Github-cred'
         DOCKER_CREDENTIALS = 'Dockerhub-cred'
         DOCKERHUB_USERNAME = 'roshanx' // Your DockerHub username
-        GITHUB_REPO = 'https://github.com/Roshanx96/wanderlust-mega-project.git'
+        GITHUB_REPO = 'https://github.com/Roshanx96/two-tier-flask-app.git'
     }
 
     stages {
