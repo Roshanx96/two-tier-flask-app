@@ -2,7 +2,6 @@ version: "3.8"
 
 services:
   mysql:
-    user: "${UID}:${GID}" 
     image: mysql:5.7
     container_name: mysql
     environment:
@@ -23,7 +22,7 @@ services:
       start_period: 60s
 
   flask-app:
-    image: trainwithshubham/two-tier-flask-app:latest
+    image: roshanx/flask-app:latest
     container_name: flask-app
     ports:
       - "5000:5000"
@@ -46,3 +45,4 @@ services:
 
 networks:
   twotier:
+    driver: bridge
