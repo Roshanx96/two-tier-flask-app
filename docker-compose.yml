@@ -45,6 +45,6 @@ services:
 
 networks:
   twotier:
-    driver: bridge
+    driver: bridge 
 volumes:
   mysql_data:
