@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         GITHUB_CREDENTIALS = 'Github-cred'
-        DOCKER_CREDENTIALS = 'Dockerhub-cred'
+        DOCKER_CREDENTIALS = 'Dockerhub-cred'   
         DOCKERHUB_USERNAME = 'roshanx' // Your DockerHub username
         GITHUB_REPO = 'https://github.com/Roshanx96/two-tier-flask-app.git'
     }
