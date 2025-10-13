@@ -10,8 +10,8 @@ services:
       MYSQL_USER: admin
       MYSQL_PASSWORD: admin
     volumes:
-      - mysql-data:/var/lib/mysql
-      - ./message.sql:/docker-entrypoint-initdb.d/message.sql  
+      - mysql_data:/var/lib/mysql                   # ✅ Named volume used here
+      - ./message.sql:/docker-entrypoint-initdb.d/message.sql
     networks:
       - twotier
     healthcheck:
@@ -45,6 +45,7 @@ services:
 
 networks:
   twotier:
-    driver: bridge 
+    driver: bridge
+
 volumes:
-  mysql_data:
+  mysql_data:                                       # ✅ Declare the named volume here
