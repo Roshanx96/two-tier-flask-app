@@ -22,7 +22,7 @@ services:
       start_period: 60s
 
   flask-app:
-    image: roshanx/twotier-app:v1
+    image: roshanx/flask-app:latest
     container_name: flask-app
     ports:
       - "5000:5000"
