@@ -22,7 +22,7 @@ services:
       start_period: 60s
 
   flask-app:
-    image: roshanx/flask-app:latest
+    image: roshanx/wanderlust-flask-app:2.0
     container_name: flask-app
     ports:
       - "5000:5000"
