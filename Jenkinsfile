@@ -24,12 +24,40 @@ pipeline {
                     }
                 }
                 stage('OWASP Dependency Check') {
-                    steps {
-                        // Ensure dependency-check is also installed or configured in tools if this fails too
-                        sh 'dependency-check.sh --project flask-app --scan . || true'
-                    }
+                steps {
+                script {
+                    /* 1. LOAD THE TOOL
+                       We use the specific name 'OWASP-Dependency-Check' that you configured
+                       in Manage Jenkins > Tools. This sets the path to the executable.
+                    */
+                    def depCheckHome = tool 'OWASP-Dependency-Check'
+                    
+                    /* 2. RUN THE SCAN
+                       - --project flask-app: Sets the name of the project in the report.
+                       - --scan .: Scans the current directory.
+                       - --format ALL: Generates XML (required for Jenkins Sidebar) AND HTML (for download).
+                       - (Removed --noupdate): Allows the tool to download the vulnerability database.
+                    */
+                    sh "${depCheckHome}/bin/dependency-check.sh --project flask-app --scan . --format ALL"
                 }
             }
+            post {
+                always {
+                    /* 3. PUBLISH TO SIDEBAR
+                       This reads the 'dependency-check-report.xml' file generated above
+                       and creates the "Dependency-Check" link/graph on the Jenkins sidebar.
+                    */
+                    dependencyCheckPublisher pattern: 'dependency-check-report.xml'
+                    
+                    /* 4. ARCHIVE ARTIFACTS
+                       This saves the 'dependency-check-report.html' file so you can 
+                       download it manually from the "Build Artifacts" section.
+                    */
+                    archiveArtifacts allowEmptyArchive: true, artifacts: 'dependency-check-report.html'
+                }
+               }
+             }
+           }
         }
 
         stage('SonarQube Analysis') {
